@@ -1,4 +1,4 @@
-class recursion{
+class recursion01{
     //print binary string without consectives 1s
     public static void withOutConsectivesOnes(int n,int lastPlace,String str){
         if(n==0){
