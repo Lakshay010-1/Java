@@ -1,4 +1,4 @@
-package Bitmanipulation;
+package bitManipulation;
 import java.util.*;
 
 public class bit_operators {
