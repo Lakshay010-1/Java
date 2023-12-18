@@ -57,6 +57,7 @@ class recursion01{
     public static int power(int x,int n){
         
         // find x to the power of n ;TC-0(logn)
+        if(x==0){return 0;}
         if(n==0){
             return 1;
         }
@@ -71,6 +72,7 @@ class recursion01{
 
         //find x to the power of n ;TC-0(n)
         /*
+            if(x==0){return 0;}
             if(n==0){
             return 1;
         }

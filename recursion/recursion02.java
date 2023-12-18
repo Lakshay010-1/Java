@@ -1,5 +1,17 @@
 
 public class recursion02 {
+
+    //hanoi tower
+    public static void hanoiTower(int n,String source,String helper,String dest){
+        if(n==1){
+            System.out.println("Transferring disk"+n+" from "+source+" to "+dest);
+            return;
+        }
+        hanoiTower(n-1, source, dest, helper);
+        System.out.println("Transferring disk"+n+" from "+source+" to "+dest);
+        hanoiTower(n-1, helper, source, dest);
+    }
+
     // find all the occurrences of a given element and print them
    public static void printAllIndexies(int arr[],int key,int i){
         if(arr.length==0){
@@ -44,7 +56,8 @@ public static void main(String[] args) {
     int key = 2;
     String str="abcab";
     int n=str.length();
-    System.out.println(totalConSubstr(str,0,n-1,n));
+    hanoiTower(3, "S", "H", "D");
+
 }
     
 }
