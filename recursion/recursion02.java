@@ -1,6 +1,62 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class recursion02 {
+
+    //print all subsets of first n natural number
+    public static void printSubset(int n,ArrayList<Integer> set){
+        if(n==0){
+            for(int i=0;i<set.size();i++){
+                System.out.print(set.get(i)+" ");
+            }
+            System.out.println();
+            return;
+        }
+        set.add(n);
+        printSubset(n-1, set);
+        set.remove(set.size()-1);
+        printSubset(n-1, set);
+    }
+
+    //find no. of ways of inviting n no. of people in pairs or single
+    public static int inviteFriends(int n){
+        if(n==1||n==2){
+            return n;
+        }
+        return inviteFriends(n-1)+(inviteFriends(n-2)*(n-1));
+    }
+
+    //calculate total no. of ways of placing title of size 1*m on floor of size n*m
+    public static int placeTitle(int n,int m){
+        if(n<m){return 1;}
+        else if(n==m){return 2;}
+        return placeTitle(n-1,m)+placeTitle(n-m, m);
+    }
+
+    //count total paths in a maze to move from (0,0) to (n,m)
+    public static int totalPaths(int i,int j,int n,int m){
+        if(i==n || j==m){
+            return 0;
+        }
+        if(i==n-1 && j==m-1){
+            return 1;
+        }
+        return totalPaths(i+1,j,n,m)+totalPaths(i, j+1, n, m);
+    }
+
+    //print all permutation of a string
+    public static  void printPerm(String str,String newStr){
+        if(str.length()==0){
+        System.out.println(newStr);
+        return;
+        }
+        for(int i=0;i<str.length();i++){
+            char currChar=str.charAt(i);
+            printPerm(str.substring(0, i)+str.substring(i+1), newStr+currChar);
+        }
+        
+}
+
 
     //print all possible combinations of a keypad number characters~0(4^n)
     public static void printKeypadComb(String Keypad[],String str,int idx,String combination){
@@ -153,13 +209,14 @@ public class recursion02 {
 public static void main(String[] args) {
     int arr[] = {1,2,3,4,5,5};
     int key = 2;
-    String str="aaa";
+    String str="abc";
     StringBuilder str1=new StringBuilder();
     StringBuilder str2=new StringBuilder();
     HashSet<String> set=new HashSet<>();
     String keypad[]={".", "abc", "def", "ghi", "jkl", "mno", "pqrs","tu", "vwx", "yz"};
     String num="23";
-    printKeypadComb(keypad, num, 0, "");
+    ArrayList<Integer> subSet=new ArrayList<>();
+    printSubset(3,subSet);    
 
        
 }
