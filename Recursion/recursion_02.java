@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class recursion02 {
+public class recursion_02 {
 
     //print all subsets of first n natural number
     public static void printSubset(int n,ArrayList<Integer> set){
@@ -43,20 +43,6 @@ public class recursion02 {
         }
         return totalPaths(i+1,j,n,m)+totalPaths(i, j+1, n, m);
     }
-
-    //print all permutation of a string
-    public static  void printPerm(String str,String newStr){
-        if(str.length()==0){
-        System.out.println(newStr);
-        return;
-        }
-        for(int i=0;i<str.length();i++){
-            char currChar=str.charAt(i);
-            printPerm(str.substring(0, i)+str.substring(i+1), newStr+currChar);
-        }
-        
-}
-
 
     //print all possible combinations of a keypad number characters~0(4^n)
     public static void printKeypadComb(String Keypad[],String str,int idx,String combination){

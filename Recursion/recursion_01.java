@@ -1,4 +1,4 @@
-class recursion01{
+class recursion_01{
     //print binary string without consectives 1s
     public static void withOutConsectivesOnes(int n,int lastPlace,String str){
         if(n==0){
@@ -61,13 +61,11 @@ class recursion01{
         if(n==0){
             return 1;
         }
-        if(n%2==1){
-            return x*power(x,n-1);
-        }
-
         int half_Res=power(x,n/2);            
         int res=half_Res*half_Res;
-        
+        if(n%2==1){
+            return  x*res;
+        }
         return res;
 
         //find x to the power of n ;TC-0(n)
@@ -128,7 +126,7 @@ class recursion01{
         return result;
     }
 
-    //print nth term fibonacci number
+    //print nth term fibonacci number space_complexity=0(n),time_complexity=0(2^n)
     public static int nthFibonacci(int n){
         // 0th based indexing
         if(n==0 || n==1){
@@ -191,6 +189,6 @@ class recursion01{
         String str="aaabbbbcccdddabc";
         boolean track[]=new boolean[26];
         StringBuilder newStr=new StringBuilder();
-        withOutConsectivesOnes(3, 0, "");
+        lastOcc(arr, 5, 0);
     }
 }

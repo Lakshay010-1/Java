@@ -1,4 +1,4 @@
-public class divideAndConquer02 {
+public class divideAndConquer_02 {
 
     public static void printArr(String arr[]){
         for(int i=0;i<arr.length;i++){
