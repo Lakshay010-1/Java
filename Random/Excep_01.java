@@ -1,4 +1,4 @@
-package com.chetancodes;
+package Random;
 import java.util.Scanner;
 
 class maxretryreached extends Exception{
@@ -12,7 +12,7 @@ class maxretryreached extends Exception{
     }
 }
 
-public class expection {
+public class Excep_01 {
     public static void main(String[] args) {
         int[] marks={23,4,5,6,7,5};
         int i=0;

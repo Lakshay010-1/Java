@@ -1,4 +1,4 @@
-package com.chetancodes;
+package Projects;
 import java.util.Scanner;
 
 // this percentage calculator is for 5 subjects

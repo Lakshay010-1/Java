@@ -1,4 +1,4 @@
-package com.chetancodes;
+package Projects;
 import java.util.Scanner;
 import java.util.Random;
 

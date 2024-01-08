@@ -1,4 +1,4 @@
-package com.chetancodes;
+package Random;
 import java.util.Scanner;
 
 class Mixture{

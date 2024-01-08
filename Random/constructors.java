@@ -1,4 +1,4 @@
-package com.chetancodes;
+package Random;
 
 //constructors
 

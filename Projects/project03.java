@@ -1,4 +1,4 @@
-package com.chetancodes;
+package Projects;
 import java.util.*;
 // guess the number game with computer
 public class project03{

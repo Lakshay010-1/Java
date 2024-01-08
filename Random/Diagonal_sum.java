@@ -1,4 +1,4 @@
-
+package Random;
 public class Diagonal_sum {
     //optimisted approach
     public static int diagonalsum(int[][] arr){
