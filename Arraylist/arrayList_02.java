@@ -1,8 +1,53 @@
+package Arraylist;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class arrayList_02 {
 
-    //is arraylist monotonic increasing and decreasing
+    //Most Frequent Number
+    public int mostFrequent(ArrayList<Integer> nums, int key) {
+        int[] result = new int[1000];
+        for (int i = 0; i < nums.size() - 1; i++) {
+            if (nums.get(i) == key) {
+                result[nums.get(i + 1) - 1]++;
+            }
+        }
+        int max = Integer.MIN_VALUE;
+        int ans = 0;
+        for (int i = 0; i < 1000; i++) {
+            if (result[i] > max) {
+                max = result[i];
+                ans = i + 1;
+            }
+        }
+        return ans;
+    }
+
+    // Lonely Numbers exists or not
+    public static ArrayList<Integer> lonelyNum(ArrayList<Integer> nums) {
+        Collections.sort(nums);
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 1; i < list.size() - 1; i++) {
+            if (nums.get(i - 1) + 1 < nums.get(i) && nums.get(i) + 1 < nums.get(i + 1)) {
+                list.add(nums.get(i));
+            }
+        }
+        if (nums.size() == 1) {
+            list.add(nums.get(0));
+        }
+        if (nums.size() > 1) {
+            if (nums.get(0) + 1 < nums.get(1)) {
+                list.add(nums.get(0));
+            }
+            if (nums.get(nums.size() - 2) + 1 < nums.get(nums.size() - 1)) {
+                list.add(nums.get(nums.size() - 1));
+            }
+        }
+
+        return list;
+    }
+
+    // is arraylist monotonic increasing and decreasing
     public boolean isMonotonic(ArrayList<Integer> A) {
         boolean inc = true;
         boolean dec = true;
@@ -16,7 +61,8 @@ public class arrayList_02 {
     }
 
     // pair sum (rotated) --~0(n)
-    // this funciton is only applicable when arraylist is sorted in ascending order and rotated.
+    // this funciton is only applicable when arraylist is sorted in ascending order
+    // and rotated.
     public static boolean pairsumRotatedExists(ArrayList<Integer> list, int key) {
         int breakingPoint = -1;
         for (int i = 0; i < list.size() - 1; i++) {
@@ -132,5 +178,12 @@ public class arrayList_02 {
         rotatedList.add(9);
         rotatedList.add(10);
         System.out.println(pairsumRotatedExists(rotatedList, 25));
+
+        ArrayList<Integer> lonlyNum = new ArrayList<>();
+        lonlyNum.add(10);
+        lonlyNum.add(6);
+        lonlyNum.add(5);
+        lonlyNum.add(8);
+        System.out.println(lonelyNum(lonlyNum));
     }
 }
