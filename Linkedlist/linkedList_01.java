@@ -1,4 +1,6 @@
 package Linkedlist;
+
+//SingleQue LinkedList
 public class linkedList_01 {
     public static class Node{
         int data;
@@ -12,6 +14,137 @@ public class linkedList_01 {
     public static Node head;
     public static Node tail;
     public static int size; 
+
+    //zig-zag linkedlist
+    public void zigzagLL(){
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node midNode=slow;
+
+        Node curr=midNode.next;
+        midNode.next=null;
+        Node prev=null;
+        Node next;
+
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        Node left=head;
+        Node right=prev;
+        Node nextL,nextR;
+        while(left!=null && right!=null){
+            nextL=left.next;
+            left.next=right;
+            nextR=right.next;
+            right.next=nextL;
+
+            left=nextL;
+            right=nextR;
+        }
+    }
+
+    //merge sort on a linkedlist
+    public Node mergeSort(Node head){
+        if(head==null || head.next==null){
+            return head;
+        }
+        //mid point (mid point should be the end of the left part)
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        Node midNode=slow;
+        Node rightHead=midNode.next;
+        midNode.next=null;
+        Node newLeft=mergeSort(head);
+        Node newRight=mergeSort(rightHead);
+        return merge(newLeft,newRight);
+    }
+    private Node merge(Node leftHead,Node rightHead){
+        Node mergedLL=new Node(-1);
+        Node temp=mergedLL;
+
+        while(leftHead!=null && rightHead!=null){
+            if(leftHead.data<=rightHead.data){
+                temp.next=leftHead;
+                leftHead=leftHead.next;
+                temp=temp.next;
+            }
+            else{
+                temp.next=rightHead;
+                rightHead=rightHead.next;
+                temp=temp.next;
+            }
+        }
+        while(leftHead!=null){
+            temp.next=leftHead;
+            leftHead=leftHead.next;
+            temp=temp.next;
+        }
+        while(rightHead!=null){
+            temp.next=rightHead;
+            rightHead=rightHead.next;
+            temp=temp.next;
+        }
+        return mergedLL.next;
+    }
+
+    //remove cycle form the list
+    public static void removeCycle(){
+        if(head==null || head.next==null){
+            return;
+        }
+        Node slow=head;
+        Node fast=head;
+        boolean isCycle=false;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                isCycle=true;
+                break;
+            }
+        }
+        if(isCycle==false){
+            return ;
+        }
+        slow=head;
+        Node prev=null;
+        while(slow!=fast){
+            prev=fast;
+            fast=fast.next;
+            slow=slow.next;
+        }
+        prev.next=null;
+    }
+
+    //check cycle in the linklist
+    public static boolean isCycle(){
+        if(head==null || head.next==null){
+            return false;
+        }
+        Node slow=head;
+        Node fast=head;
+
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(fast==slow){
+                return true;
+            }
+            
+        }
+        return false;
+    }
     
     //chech if the linklist is palindrome-ic or not
     public boolean checkPalindrome(){
@@ -105,7 +238,7 @@ public class linkedList_01 {
 
     }
 
-    //seacrch data in linklist (using recursion) --~ 0()
+    //seacrch data in linklist (using recursion) --~ 0(n)
     public int searchREC(Node head,int data){
         if(head==null){
             return -1;
@@ -236,23 +369,40 @@ public class linkedList_01 {
         System.out.println("null");
     }
     public static void main(String[] args) {  
+        /*
+        //cycle linkedlist
+        head=new Node(1);
+        Node temp=head.next=new Node(2);
+        head.next.next=new Node(3);
+        head.next.next.next=temp;
+        System.out.println(isCycle());
+        removeCycle();
+        System.out.println(isCycle());
+        */
         linkedList_01 ll=new linkedList_01();
         //ll.head=new Node(2);   
         ll.printLL();  
-        ll.addFirst(2);
+        ll.addFirst(4);
         ll.printLL();
-        ll.addFirst(1);
+        ll.addFirst(5);
         ll.printLL();
-        //ll.addLast(2);
+        ll.addLast(2);
         ll.printLL();
-        ll.addLast(3);
+        ll.addLast(1);
         ll.printLL();
-        //ll.add(3, 2);
+        ll.add(3, 2);
         ll.printLL();
-        System.out.println("size ==> "+ size);
+        ll.zigzagLL();
+        ll.printLL();
+        //System.out.println("size ==> "+ size);
     
-        System.out.println(ll.searchITR(2));
-        System.out.println(ll.searchREC(head, 10));
-        System.out.println(ll.checkPalindrome());
+        //System.out.println(ll.searchITR(2));
+        //System.out.println(ll.searchREC(head, 10));
+        //System.out.println(ll.checkPalindrome());
+
+
+        
+
+        
     }
 }
