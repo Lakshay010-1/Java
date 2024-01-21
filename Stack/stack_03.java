@@ -105,7 +105,7 @@ public class stack_03 {
             if (s.isEmpty()) {
                 grElement[i] = -1;
             } else {
-                grElement[i] = s.peek();
+                grElement[i] = arr[s.peek()];
             }
             s.push(i);
         }
@@ -124,7 +124,7 @@ public class stack_03 {
             if (s.isEmpty()) {
                 grElement[i] = -1;
             } else {
-                grElement[i] = s.peek();
+                grElement[i] = arr[s.peek()];
             }
             s.push(i);
         }
@@ -144,7 +144,7 @@ public class stack_03 {
             if (s.isEmpty()) {
                 smElement[i] = n;
             } else {
-                smElement[i] = s.peek();
+                smElement[i] = height[s.peek()];
             }
             s.push(i);
         }
@@ -163,7 +163,7 @@ public class stack_03 {
             if (s.isEmpty()) {
                 smElement[i] = -1;
             } else {
-                smElement[i] = s.peek();
+                smElement[i] = height[s.peek()];
             }
             s.push(i);
         }
