@@ -278,7 +278,7 @@ public class stack_03 {
                     }
                 int distance = i - s.peek() - 1;
                 int min_height = Math.min(rainGraph[s.peek()],rainGraph[i])- pop_height;
-                ans += distance * min_height;
+                ans += distance * min_height*width;
             }
             s.push(i);
         }
