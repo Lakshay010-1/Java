@@ -1,5 +1,4 @@
 package Stack;
-import java.sql.Array;
 import java.util.Stack;
 
 public class stack_03 {
