@@ -1,4 +1,5 @@
 package Binary_Tree;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -11,6 +12,23 @@ public class biTree_01 {
             this.data=data;
             this.left=null;
             this.right=null;
+        }
+    }
+    static class Info{
+        int height;
+        int diameter;
+
+        Info(int diameter,int height){
+            this.height=height;
+            this.diameter=diameter;
+        }
+    }
+    static class Status{
+        Node nRoot;
+        int horDis;
+        Status(Node nRoot,int horDis){
+            this.nRoot=nRoot;
+            this.horDis=horDis;
         }
     }
     static class BinaryTree{
@@ -123,6 +141,110 @@ public class biTree_01 {
             return sum;
         }
 
+        //diameter of the tree{unoptimised} ~0(n^2)
+    public static int diameterBTuo(Node root){
+        if(root==null){
+            return 0;
+        }
+        int leftCount=countNodes(root.left);
+        int rightCount=countNodes(root.right);
+        int leftHeight=heightTree(root.left);
+        int rightHeight=heightTree(root.right);
+        int height=Math.max(Math.max(leftHeight+rightHeight+1,leftCount),rightCount);
+        return height;
+    }
+
+    
+
+    //diameter of the tree{optimised} ~0(n)
+    public static Info diameterBTo(Node root){
+        if(root==null){
+            return (new Info(0,0));
+        }
+        Info leftInfo=diameterBTo(root.left);
+        Info rightInfo=diameterBTo(root.right);
+        int dia=Math.max(leftInfo.diameter,Math.max(rightInfo.diameter, leftInfo.height+rightInfo.height+1));
+        int hgt=Math.max(leftInfo.height,rightInfo.height)+1;
+        return(new Info(dia, hgt));
+    }
+
+    //check if given root is actually the a sub-root of the main tree root
+    public static boolean isSubTree(Node root,Node subroot){
+        if(root==null && subroot==null){
+            return true;
+        }
+        else if(root==null && subroot!=null){
+            return false;
+        }
+        else if(root!=null && subroot==null){
+            return true;
+        }
+
+        if(root.data==subroot.data){
+            if(isIdentical(root,subroot)){
+                return true;
+            }
+        }
+        boolean leftCond=isSubTree(root.left, subroot);
+        boolean rightCond=isSubTree(root.right, subroot);
+        return leftCond||rightCond;
+    }
+
+    public static boolean isIdentical(Node root,Node subroot){
+        if(root==null && subroot==null){
+            return true;
+        }
+        else if(root==null && subroot!=null){
+            return false;
+        }
+        else if(root!=null && subroot==null){
+            return true;
+        }
+        if(!isIdentical(root.left, subroot.left)){
+            return false;
+        }
+        if(!isIdentical(root.right, subroot.right)){
+            return false;
+        }
+        return true;
+    }
+
+    //top view of a tree
+    public static void topView(Node root){
+        Queue<Status> q=new LinkedList<>();
+        int min=0,max=0;        
+        HashMap<Integer,Node> map=new HashMap<>();
+        q.add(new Status(root, 0));
+        q.add(null);
+        while(!q.isEmpty()){
+            Status curr=q.remove();
+            if(curr==null){
+                if(q.isEmpty()){
+                    break;
+                }
+                else{
+                    q.add(null);
+                }
+            }else{
+                if(!map.containsKey(curr.horDis)){
+                    map.put(curr.horDis, curr.nRoot);
+                }
+                if(curr.nRoot.left!=null){
+                    q.add(new Status(curr.nRoot.left, curr.horDis-1));
+                    min=Math.min(min,curr.horDis-1);
+                }
+                if(curr.nRoot.right!=null){
+                    q.add(new Status(curr.nRoot.right, curr.horDis+1));
+                    max=Math.max(max,curr.horDis+1);
+                }
+            }   
+        }
+        for(int i=min;i<=max;i++){
+            System.out.print(map.get(i).data+" ");
+        }
+        System.out.println();
+    }
+
 
     }
     public static void main(String[] args) {
@@ -149,11 +271,31 @@ public class biTree_01 {
         System.out.println(tree.countNodes(root));
         //sum total of nodes
         System.out.println(tree.sumNodes(root));
-
-
-
-
-        
+        //diameter of the tree
+        System.out.println("diameter (unoptimised) = "+tree.diameterBTuo(root));
+        Info diameterO=tree.diameterBTo(root);
+        System.out.println("diameter (optimised) = "+diameterO.diameter);
+        int treee[]={1,2,3,-1,-1,4,-1,-1,5,-1,6,-1,-1};
+        tree.idx=-1;
+        Node root1=tree.buildTreePre(treee);
+        System.out.println(root1.data);
+        int subtree[]={2,3,-1,-1,4,-1,-1};
+        tree.idx=-1;
+        Node root2=tree.buildTreePre(subtree);
+        System.out.println(root2.data);
+        int subtree2[]={5,-1,6,-1,-1};
+        tree.idx=-1;
+        Node root3=tree.buildTreePre(subtree2);
+        System.out.println(root3.data);
+        int subtree3[]={5,-1,6,-1,1,-1,-1};
+        tree.idx=-1;
+        Node root4=tree.buildTreePre(subtree3);
+        System.out.println(root4.data);
+        System.out.println(tree.isSubTree(root1,root2));
+        //System.out.println(tree.isSubTree(root1,root3));
+        System.out.println(tree.isSubTree(root1,root4));
+        tree.topView(root1);
+                
     }
     
 }
