@@ -150,8 +150,8 @@ public class biTree_01 {
         int rightCount=countNodes(root.right);
         int leftHeight=heightTree(root.left);
         int rightHeight=heightTree(root.right);
-        int height=Math.max(Math.max(leftHeight+rightHeight+1,leftCount),rightCount);
-        return height;
+        int diameter=Math.max(Math.max(leftHeight+rightHeight+1,leftCount),rightCount);
+        return diameter;
     }
 
     
@@ -170,14 +170,8 @@ public class biTree_01 {
 
     //check if given root is actually the a sub-root of the main tree root
     public static boolean isSubTree(Node root,Node subroot){
-        if(root==null && subroot==null){
-            return true;
-        }
-        else if(root==null && subroot!=null){
+        if(root==null){
             return false;
-        }
-        else if(root!=null && subroot==null){
-            return true;
         }
 
         if(root.data==subroot.data){
