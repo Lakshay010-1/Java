@@ -1,5 +1,6 @@
 package Binary_Tree;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Queue;
 import java.util.LinkedList;
 
@@ -169,6 +170,63 @@ public class biTree_02 {
         printBT(root.left);
         printBT(root.right);
     }
+
+    //Check if a Binary Tree is univalued or not
+    public static boolean isUnivalued(Node root){
+        if(root==null){
+            return true;
+        }
+        if(root.left!=null && root.data!=root.left.data){
+            return false;
+        }
+        if(root.right!=null && root.data!=root.right.data){
+            return false;
+        }
+
+        boolean leftSubTree=isUnivalued(root.left);
+        boolean rightSubTree=isUnivalued(root.right);
+        return leftSubTree&&rightSubTree;
+    }
+
+    //mirror the binary tree
+    public static void mirrorBT(Node root){
+        if(root==null){
+            return ;
+        }
+        mirrorBT(root.left);
+        mirrorBT(root.right);
+        Node temp=root.left;
+        root.left=root.right;
+        root.right=temp;
+    }
+
+    //Delete leaf nodes with values as x
+    public static Node deleteLeaf(Node root,int x){
+        if(root==null){
+            return null;
+        }
+        
+        root.left=deleteLeaf(root.left, x);
+        root.right=deleteLeaf(root.right, x);
+        if(root.data==x&&root.left==null && root.right==null ){
+            return null;
+        }
+        return root;
+    }
+
+    //Maximum Path Sum in a Binary Tree
+    public static int maxPathSum(Node root){
+        if(root==null){
+            return 0;
+        }
+        int leftSubTree=maxPathSum(root.left);
+        int rightSubTree=maxPathSum(root.right);
+        int withRootSum=leftSubTree+rightSubTree+root.data;
+        int max=Math.max(Math.max(leftSubTree, rightSubTree),withRootSum);
+        return max;
+
+    }
+
 }
     public static void main(String[] args) {
         BinaryTree tree=new BinaryTree();
@@ -184,6 +242,28 @@ public class biTree_02 {
         System.out.println(tree.KthAncestor(root, 6, 1));
         System.out.println(tree.transform(root));
         tree.printBT(root);
+        int nodes2[]={1,1,1,-1,-1,1,-1,-1,1,-1,1,-1,-1};
+        tree.idx=-1;
+        Node root2=tree.buildTreePre(nodes2);
+        System.out.println();
+        System.out.println(tree.isUnivalued(root));
+        System.out.println(tree.isUnivalued(root2));
+        tree.mirrorBT(root);
+        tree.printBT(root);
+        int nodess[]={1,3,3,-1,-1,2,-1,-1,3,-1,-1};
+        tree.idx=-1;
+        Node rooot=tree.buildTreePre(nodess);
+        System.out.println();
+        tree.printBT(rooot);
+        tree.deleteLeaf(rooot, 3);
+        System.out.println();
+        tree.printBT(rooot);
+        int noddes[]={4,2,-1,-1,7,-1,-1};
+        tree.idx=-1;
+        Node rroot=tree.buildTreePre(noddes);
+        System.out.println();
+        System.out.println(tree.maxPathSum(rroot));
+
 
                 
     }
