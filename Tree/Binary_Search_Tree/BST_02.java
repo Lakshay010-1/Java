@@ -1,6 +1,8 @@
 package Tree.Binary_Search_Tree;
 
+import java.util.Queue;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class BST_02 {
     static class Node {
@@ -22,6 +24,65 @@ public class BST_02 {
             this.max=max;
             this.size=size;
         }
+    }
+
+    //Find the closest element in Binary Search Tree
+    public static Node closestEle(Node root,int target){
+        if(root==null){
+            return null;
+        }
+        Queue<Node> q=new LinkedList<>();
+        inOrderList(root, q);
+        Node minDiff=null;
+        int minValue=Integer.MAX_VALUE;
+        while(!q.isEmpty()){
+            Node temp=q.remove();
+            int diff=Math.min(minValue,Math.abs(temp.data-target));
+            if(diff<minValue){
+                minDiff=temp;
+                minValue=diff;
+            }
+        }
+        return minDiff;
+    }
+
+    //find the kth smallest node in the tree
+    public static Node kthsmallest(Node root,int k){
+        if(root==null){
+            return null;
+        }
+        Queue<Node> q=new LinkedList<>();
+        inOrderList(root,q);
+        Node nValue=null;
+        while(k!=0){
+            nValue=q.remove();
+            k--;
+        }
+        return nValue;
+
+    }
+    public static void inOrderList(Node root,Queue<Node> q){
+        if(root==null){
+            return;
+        }
+        inOrderList(root.left, q);
+        q.add(root);
+        inOrderList(root.right, q);
+    }
+
+    //Range sum of BST
+    public static int sumRangeBST(Node root,int low,int high){
+        if(root==null){
+            return 0;
+        }
+        int sumL=sumRangeBST(root.left, low, high);
+        int sumR=sumRangeBST(root.right, low, high);
+        int sum=0;
+        if (root.data>=low && root.data<=high) {
+            sum+=sumL+sumR+root.data;
+        }
+        
+        return sum;
     }
 
     //preOrder Traversal
@@ -179,5 +240,27 @@ public class BST_02 {
           Node root6=merge2BST(root4, root5);
           preOrderTra(root6);
           */
+        ArrayList<Integer> list3=new ArrayList<>();
+        list3.add(3);
+        list3.add(5);
+        list3.add(6);
+        list3.add(8);
+        list3.add(10);
+        list3.add(11);
+        list3.add(12);
+        Node root7=balanceBST(list3, 0, list3.size()-1);
+        preOrderTra(root7);
+        System.out.println();
+        int sum=sumRangeBST(root7,1 , 8);
+        System.out.println(sum);
+        Node kthEle=kthsmallest(root7,2);
+        System.out.println(kthEle.data);
+        Node minDiffNode=closestEle(root7, 13);
+        if(minDiffNode!=null){
+        System.out.println(minDiffNode.data);
+        }
+        else{
+            System.out.println("null");
+        }
     }
 }
