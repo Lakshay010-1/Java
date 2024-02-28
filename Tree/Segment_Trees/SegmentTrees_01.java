@@ -24,7 +24,7 @@ public class SegmentTrees_01 {
 
         //Sum of elements in a range[i,j] ~ TC-0(logn)
         public int getSum(int arr[],int i,int j){
-            int n=arr.length;// ~ TC-0(k)
+            int n=arr.length;// ~ TC-0(1)
             return getSumUtil(0, 0, n-1, i, j);// ~ TC-0(logn)
             
         }
