@@ -15,10 +15,17 @@ public class Graph_01 {
 
     //Breadth first search ~ TC-0(Vertices+Edges)
     public static void bfs(ArrayList<Edge> graph[]){
-        Queue<Integer> q=new LinkedList<>();
         boolean vis[]=new boolean[graph.length];
-        q.add(0);
+        for(int i=0;i<graph.length;i++){
+            if(!vis[i]){
+                bfsUtil(graph,vis,i);
+            }
+        }
+    }
+    private static void bfsUtil(ArrayList<Edge> graph[],boolean vis[],int src){
+        Queue<Integer> q=new LinkedList<>();
 
+        q.add(src);
         while(!q.isEmpty()){
             int cur=q.remove();
             if(!vis[cur]){
@@ -30,18 +37,25 @@ public class Graph_01 {
                 }
             }
         }
-        System.out.println();        
     }
     
-    public static boolean visitedDFS[];
     //Depth first search ~ TC-0(Vertices+Edges)
-    public static void dfs(ArrayList<Edge> graph[],int src){
+    public static void dfs(ArrayList<Edge> graph[]){
+        boolean vis[]=new boolean[graph.length];
+        for(int i=0;i<graph.length;i++){
+            if(!vis[i]){
+                dfsUtil(graph, vis, i);
+            }
+        }
+
+    }
+    private static void dfsUtil(ArrayList<Edge> graph[],boolean vis[],int src){
         System.out.print(src+" ");
-        visitedDFS[src]=true;
+        vis[src]=true;
         for(int i=0;i<graph[src].size();i++){
             Edge e=graph[src].get(i);
-            if(!visitedDFS[e.dest]){
-                dfs(graph, e.dest);
+            if(!vis[e.dest]){
+                dfsUtil(graph,vis,e.dest);
             }
         }
     }
@@ -63,12 +77,12 @@ public class Graph_01 {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         //Creating a Graph
-        int vertices=7;
+        int vertices=9;
         ArrayList<Edge> graph[]=new ArrayList[vertices];
         for(int i=0;i<graph.length;i++){
             graph[i]=new ArrayList<>();
         }
-        // //bi-directed and connected graph.
+        // //bi-directed and dis-connected graph.
         graph[0].add(new Edge(0,1,1));
         graph[0].add(new Edge(0,2,1));
         graph[1].add(new Edge(1,0,1));
@@ -83,25 +97,34 @@ public class Graph_01 {
         graph[4].add(new Edge(4,5,1));
         graph[5].add(new Edge(5,3,1));
         graph[5].add(new Edge(5,4,1));
-        graph[5].add(new Edge(5,6,1));
-        graph[6].add(new Edge(6,5,1));
+        graph[6].add(new Edge(6,6,1));
+        graph[7].add(new Edge(7,8,1));
+        graph[8].add(new Edge(8,7,1));
+
         //find x's neighbours
         Scanner sc=new Scanner(System.in);
-        System.out.println("enter the vertex integer value within range which is "+(vertices-1)+" : ");
+        System.out.println("enter the vertex integer value within range or equal to "+(vertices-1)+" : ");
         int x=sc.nextInt(vertices);
         System.out.print(x+" neighbours = ");
         for(int i=0;i<graph[x].size();i++){
             Edge e=graph[x].get(i);
             System.out.print(e.dest+" ");
         }
+
+        //breadth first search
         System.out.println();
         System.out.print("bfs = ");
         bfs(graph);
-        visitedDFS=new boolean[vertices];
-        System.out.print("dfs = ");
-        dfs(graph, 0);
+        
+        //depth first search
         System.out.println();
-        System.out.println("does path exist :"+hasPath(graph, new boolean[vertices],0, 6));
+        System.out.print("dfs = ");
+        dfs(graph);
+
+        //Question-> Does path exist from src point to dest point
+        System.out.println();
+        System.out.print("does path exist :");
+       System.out.println( hasPath(graph, new boolean[vertices],0, 6));
        
     }
 
