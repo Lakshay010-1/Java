@@ -16,6 +16,8 @@ public class Graph_01 {
     //Breadth first search ~ TC-0(Vertices+Edges)
     public static void bfs(ArrayList<Edge> graph[]){
         boolean vis[]=new boolean[graph.length];
+        //traversing through every vertex to check if they are visited or not;
+        //(this is to overcome the limitation of disconnected graph)
         for(int i=0;i<graph.length;i++){
             if(!vis[i]){
                 bfsUtil(graph,vis,i);
@@ -59,7 +61,8 @@ public class Graph_01 {
             }
         }
     }
-    //Find if there exist a path from point src to point dest in the graph.(dfs approach)
+    
+    //Find if there exist a path from point src to point dest in the graph.(dfs approach) ~ TC-0(Vertices+Edges)
     public static boolean hasPath(ArrayList<Edge> graph[],boolean vis[],int src,int dest){
         if(src==dest){
             return true;
@@ -74,6 +77,38 @@ public class Graph_01 {
         return false;
     }
 
+    //detect cycle in an undirected graph(dfs approach) ~ TC-0(Vertices+Edges)
+    public static boolean detectCycle(ArrayList<Edge> graph[]){
+        boolean vis[]=new boolean[graph.length];
+        for(int i=0;i<graph.length;i++){
+            if(!vis[i]){
+                if(detectCycleUtil(graph,vis,i,-1)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private static boolean detectCycleUtil(ArrayList<Edge> graph[],boolean vis[],int cur,int par){
+        vis[cur]=true;
+        for(int i=0;i<graph[cur].size();i++){
+            Edge e=graph[cur].get(i);
+            //case-1.neighbour is un-visited
+             if(!vis[e.dest] ){
+                if(detectCycleUtil(graph, vis, e.dest, cur)){
+                    return true;
+                }
+            }   
+            //case-2.neighbour is visited but it's not the parent that means it a cycle
+             else if(vis[e.dest] && e.dest!=par){
+                return true;
+            }
+            //case-3.neighbour is visited but it's the parent that doesn't specifies anything
+            //so in this case "continue";
+        }
+        return false;
+    }
+
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         //Creating a Graph
@@ -83,13 +118,13 @@ public class Graph_01 {
             graph[i]=new ArrayList<>();
         }
         // //bi-directed and dis-connected graph.
+        graph[0].add(new Edge(0,3,1));
         graph[0].add(new Edge(0,1,1));
-        graph[0].add(new Edge(0,2,1));
         graph[1].add(new Edge(1,0,1));
-        graph[1].add(new Edge(1,3,1));
-        graph[2].add(new Edge(2,0,1));
+        graph[1].add(new Edge(1,2,1));
         graph[2].add(new Edge(2,4,1));
-        graph[3].add(new Edge(3,1,1));
+        graph[2].add(new Edge(2,1,1));
+        graph[3].add(new Edge(3,0,1));
         graph[3].add(new Edge(3,4,1));
         graph[3].add(new Edge(3,5,1));
         graph[4].add(new Edge(4,2,1));
@@ -125,6 +160,9 @@ public class Graph_01 {
         System.out.println();
         System.out.print("does path exist :");
        System.out.println( hasPath(graph, new boolean[vertices],0, 6));
+
+       //Find cycle
+       System.out.println("cycle exists :"+detectCycle(graph));
        
     }
 
