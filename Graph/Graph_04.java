@@ -30,7 +30,7 @@ public class Graph_04 {
 
     }
 
-    //dijkstra Algorithm {used to find the shortest path form source to all vertices in "weighted Graph"} 
+    //dijkstra Algorithm (greedy Optimisation) {used to find the shortest path form source to all vertices in "positive weighted Graph"} 
     //~ TC-0(Vertices+Edges.log(Vertices)) Or TC-0(Vertices^2)
     public static void dijkstra(ArrayList<Edge> graph[],int src){
         int dis[]=new int[graph.length];
