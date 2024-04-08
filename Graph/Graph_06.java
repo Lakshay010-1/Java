@@ -26,7 +26,7 @@ public class Graph_06 {
         }
     }
 
-    //prims algorithm  
+    //prims algorithm  ~ TC - 0(V+E)
     public static void prims(ArrayList<Edge> graph[]){
         boolean vis[]=new boolean[graph.length];
         int finalCost=0;//Total Minimum cost
