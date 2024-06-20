@@ -21,7 +21,7 @@ public class Test_jdbc_03 {
         }
         System.out.println("connection established");
 
-        //data from variables 
+        //Getting data from variables 
         //Approach-1;
 
 //        Statement st=null;
