@@ -1,3 +1,4 @@
+import java.util.*;
 //Step.1-import package;
  import java.sql.*;
 
@@ -13,9 +14,10 @@ public class Test_jdbc_01 {
 
         //Step.3-Create connection;
         Connection con=null;
-        // String url=             ; e.g."jdbc:postgresql://localhost:5432/test_01";
-        // String user=            ; e.g."postgres";
-        // String password=        ; e.g.*****;
+        Scanner sc=new Scanner(System.in);
+        String url=sc.next();             ; //e.g."jdbc:postgresql://localhost:5432/test_01";
+        String user=sc.next();            ; //e.g."postgres";
+        String password=sc.next();        ; //e.g.*****;
         try {
             con=DriverManager.getConnection(url,user,password);
         } catch (SQLException e) {
