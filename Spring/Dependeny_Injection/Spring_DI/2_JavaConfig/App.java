@@ -12,17 +12,5 @@ public class App
         Alien al=context.getBean("alien",Alien.class);
         System.out.println(al.getLanguage());
         al.code();
-
-
-
-        /*XML
-        ApplicationContext context=new ClassPathXmlApplicationContext("springDI.xml");
-        //Alien al= (Alien) context.getBean("alien");
-        //Alien al=context.getBean(Alien.class);
-        Alien al=context.getBean("alien",Alien.class);
-        System.out.println(al.getLanguage());
-        al.code();
-        */
-
     }
 }
