@@ -12,10 +12,13 @@ public class Test_jdbc_03 {
         }
 
         Connection con=null;
+        String url; //e.g."jdbc:postgresql://localhost:5432/test_01";
+        String user;// e.g."postgres";
+        String password; //e.g.*****;
         Scanner sc=new Scanner(System.in);
-        String url=sc.next();             ; //e.g."jdbc:postgresql://localhost:5432/test_01";
-        String user=sc.next();            ; //e.g."postgres";
-        String password=sc.next();        ; //e.g.*****;
+        url=sc.next();
+        user=sc.next();
+        password=sc.next();
         try {
             con=DriverManager.getConnection(url,user,password);
         } catch (SQLException e) {
@@ -23,7 +26,7 @@ public class Test_jdbc_03 {
         }
         System.out.println("connection established");
 
-        //Getting data from variables 
+        //data from variables 
         //Approach-1;
 
 //        Statement st=null;
