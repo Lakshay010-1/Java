@@ -1,3 +1,4 @@
+package com.DI.SpringBoot_DI;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
