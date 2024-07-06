@@ -1,5 +1,10 @@
 package org.example.config;
 import org.example.*;
+import org.example.model.Alien;
+import org.example.model.Computer;
+import org.example.model.Desktop;
+import org.example.model.Laptop;
+import org.example.model.SmartGlass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
