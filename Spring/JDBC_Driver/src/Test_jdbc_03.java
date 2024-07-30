@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.Scanner;
 
-//Prepared Statements
+//Prepared Statements...
 public class Test_jdbc_03 {
     //"employees" is the name of the table
     public static void main(String[] args) {
