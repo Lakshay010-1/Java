@@ -1,1 +1,0 @@
-create table computer (brand varchar(50) primary key,rating int,price int);
