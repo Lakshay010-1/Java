@@ -7,7 +7,7 @@ public class RestSpringBootApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestSpringBootApplication.class, args);
-		System.out.println("Job Portal using Spring boot Rest (backend)");
+		System.out.println("Job Portal using Spring boot Rest (backend)"); 
 	}
 
 }
