@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="coder_01" class="org.program.model.Coder" scope="singleton" autowire="byName" lazy-init="true">
+        <property name="rating" value="8" />
+        <property name="com">
+            <!--Inner Bean -->
+            <bean id="com_01" class="org.program.model.Laptop" lazy-init="true">
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="coder_02" class="org.program.model.Coder" scope="prototype" autowire="byType" lazy-init="true">
+<!--        <constructor-arg type="int" value="21"/>-->
+<!--        <constructor-arg type="org.program.model.Computer" ref="com_02"/>-->
+
+<!-- "name" property in constructor-arg should only be used when variable are in chronological order according to constructor parameter else it will give errors or use ConstructorProperties Annotation-->
+<!--        <constructor-arg name="com" ref="com_02"/>-->
+<!--        <constructor-arg name="rating" value="21"/>-->
+
+        <constructor-arg index="1" ref="com_02"/>
+        <constructor-arg index="0" value="21"/>
+    </bean>
+
+    <bean id="com_02" class="org.program.model.Desktop" primary="true" lazy-init="true">
+    </bean>
+
+</beans>
