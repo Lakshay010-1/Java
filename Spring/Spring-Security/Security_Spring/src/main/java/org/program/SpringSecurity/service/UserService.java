@@ -4,6 +4,7 @@ import org.program.SpringSecurity.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,11 @@ public class UserService {
     @Autowired
     JWTService jwtService;
 
-    public Users register(Users u){
-        return repo.save(u);
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+
+    public Users register(Users user){
+        user.setPassword(encoder.encode(user.getPassword()));
+        return repo.save(user);
     }
 
     public String verify(Users user) {
