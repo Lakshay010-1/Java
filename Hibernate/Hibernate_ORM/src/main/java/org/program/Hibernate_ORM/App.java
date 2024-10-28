@@ -26,17 +26,17 @@ public class App
 //        Create
         Coder c1=new Coder(1,"A",5,team1);
         session.save(c1);
-//
+
 //        Read
         Coder c2=session.get(Coder.class,2);
         System.out.println("Details of Coder 2 are "+c2);
-//
+
 //        Update
         Coder c3=session.get(Coder.class,3);
         c3.setName("X");
         c3.setRating(10);
         session.save(c3);
-//
+        
 //        Delete
         Coder c4=session.get(Coder.class,4);
         session.delete(c4);
