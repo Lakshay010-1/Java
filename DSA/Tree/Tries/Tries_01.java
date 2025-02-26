@@ -4,13 +4,13 @@ public class Tries_01{
 
     static class NodeMod{
         NodeMod child[];
-        boolean endOfWorld;
+        boolean endOfWord;
         //frequency
         int fre;
 
         public NodeMod(){
             child=new NodeMod[26];
-            endOfWorld=false;
+            endOfWord=false;
             fre=1;
             for(int i=0;i<child.length;i++){
                 child[i]=null;
@@ -21,11 +21,11 @@ public class Tries_01{
 
     static class Node{
         Node child[];
-        boolean endOfWorld;
+        boolean endOfWord;
 
         public Node(){
             this.child=new Node[26];
-            this.endOfWorld=false;
+            this.endOfWord=false;
             for(int i=0;i<child.length;i++){
                 child[i]=null;
             }
@@ -45,7 +45,7 @@ public class Tries_01{
             cur=cur.child[idx];
             
         }
-        cur.endOfWorld=true;
+        cur.endOfWord=true;
     }
 
     //search word in trie ~ TC -0(Length of the longest word)
@@ -58,7 +58,7 @@ public class Tries_01{
             }
             cur=cur.child[idx];            
         }    
-        return cur.endOfWorld==true;
+        return cur.endOfWord==true;
     }
 
     //word break problem ~ TC -0(Length of the key)
@@ -102,7 +102,7 @@ public class Tries_01{
             }
             cur=cur.child[idx];
         }
-        cur.endOfWorld=true;
+        cur.endOfWord=true;
     }
 
     //given a word,return if it is a prefix of a some word in the trie or not
@@ -141,7 +141,7 @@ public class Tries_01{
         }
 
         for(int i=0;i<root.child.length;i++){
-            if(root.child[i]!=null && root.child[i].endOfWorld==true){
+            if(root.child[i]!=null && root.child[i].endOfWord==true){
                 char c=(char)(i+'a');
                 temp.append(c);
                 if(temp.length()>ans.length()){
@@ -204,10 +204,5 @@ public class Tries_01{
             insert(str.substring(i));
         }
         System.out.println("total unique subString = "+ countUSubstring(root));
-
-
-
-
-
     }    
 }
