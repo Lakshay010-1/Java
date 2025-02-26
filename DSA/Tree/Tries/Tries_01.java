@@ -5,7 +5,6 @@ public class Tries_01{
     static class NodeMod{
         NodeMod child[];
         boolean endOfWord;
-        //frequency
         int fre;
 
         public NodeMod(){
